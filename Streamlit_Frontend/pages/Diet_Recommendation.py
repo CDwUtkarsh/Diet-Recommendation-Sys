@@ -75,7 +75,7 @@ class Person:
             else:
                 recommended_nutrition = [meal_calories,rnd(10,30),rnd(0,4),rnd(0,30),rnd(0,400),rnd(40,75),rnd(4,10),rnd(0,10),rnd(30,100)]
             generator=Generator(recommended_nutrition)
-            recommended_recipes=generator.generate().json()['output']
+            recommended_recipes = generator.generate()['output']
             recommendations.append(recommended_recipes)
         for recommendation in recommendations:
             for recipe in recommendation:
