@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics.pairwise import cosine_similarity
 
+
 class Generator:
 
     def __init__(self, nutrition_values):
@@ -12,41 +13,30 @@ class Generator:
         self.dataset = pd.read_csv(
             "Data/dataset.csv",
             encoding="latin1",
-            engine="python",
             on_bad_lines="skip"
         )
 
-        # Convert Nutrition column from string to list
-        self.dataset["Nutrition"] = self.dataset["Nutrition"].apply(
-            lambda x: eval(x) if isinstance(x, str) else x
-        )
+        # Nutrition columns
+        self.nutrition_cols = [
+            "Calories",
+            "FatContent",
+            "SaturatedFatContent",
+            "CholesterolContent",
+            "SodiumContent",
+            "CarbohydrateContent",
+            "FiberContent",
+            "SugarContent",
+            "ProteinContent",
+        ]
 
-        # Create nutrition dataframe
-        nutrition_df = pd.DataFrame(
-            self.dataset["Nutrition"].tolist(),
-            columns=[
-                "Calories",
-                "FatContent",
-                "SaturatedFatContent",
-                "CholesterolContent",
-                "SodiumContent",
-                "CarbohydrateContent",
-                "FiberContent",
-                "SugarContent",
-                "ProteinContent",
-            ],
-        )
+        # Remove missing values
+        self.dataset = self.dataset.dropna(subset=self.nutrition_cols)
 
-        self.dataset = pd.concat([self.dataset, nutrition_df], axis=1)
-
-        # Drop rows with missing values
-        self.dataset = self.dataset.dropna(subset=nutrition_df.columns)
-
-        # Scale features
+        # Scale nutrition values
         scaler = StandardScaler()
-        self.scaled_data = scaler.fit_transform(self.dataset[nutrition_df.columns])
+        self.scaled_data = scaler.fit_transform(self.dataset[self.nutrition_cols])
 
-        self.target = scaler.transform([self.nutrition_values])
+        self.target = scaler.transform([nutrition_values])
 
 
     def generate(self):
