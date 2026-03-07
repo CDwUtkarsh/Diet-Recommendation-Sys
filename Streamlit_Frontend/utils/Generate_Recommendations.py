@@ -1,12 +1,13 @@
 import pandas as pd
-from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import StandardScaler
+from sklearn.metrics.pairwise import cosine_similarity
 
 class Generator:
 
     def __init__(self, nutrition_values):
+
         self.nutrition_values = nutrition_values
-        
+
         # Load dataset
         self.dataset = pd.read_csv(
             "Data/dataset.csv",
@@ -15,34 +16,45 @@ class Generator:
             on_bad_lines="skip"
         )
 
-        # Nutrition columns
-        self.nutrition_cols = [
-            'Calories','FatContent','SaturatedFatContent',
-            'CholesterolContent','SodiumContent',
-            'CarbohydrateContent','FiberContent',
-            'SugarContent','ProteinContent'
-        ]
+        # Convert Nutrition column from string to list
+        self.dataset["Nutrition"] = self.dataset["Nutrition"].apply(
+            lambda x: eval(x) if isinstance(x, str) else x
+        )
 
-        # Clean dataset
-        self.dataset = self.dataset.dropna(subset=self.nutrition_cols)
+        # Create nutrition dataframe
+        nutrition_df = pd.DataFrame(
+            self.dataset["Nutrition"].tolist(),
+            columns=[
+                "Calories",
+                "FatContent",
+                "SaturatedFatContent",
+                "CholesterolContent",
+                "SodiumContent",
+                "CarbohydrateContent",
+                "FiberContent",
+                "SugarContent",
+                "ProteinContent",
+            ],
+        )
 
-        # Scale nutrition data
+        self.dataset = pd.concat([self.dataset, nutrition_df], axis=1)
+
+        # Drop rows with missing values
+        self.dataset = self.dataset.dropna(subset=nutrition_df.columns)
+
+        # Scale features
         scaler = StandardScaler()
-        self.scaled_data = scaler.fit_transform(self.dataset[self.nutrition_cols])
+        self.scaled_data = scaler.fit_transform(self.dataset[nutrition_df.columns])
 
-        # Target nutrition vector
         self.target = scaler.transform([self.nutrition_values])
+
 
     def generate(self):
 
-        # Calculate similarity
         similarity = cosine_similarity(self.target, self.scaled_data)
 
-        # Get top recipes
         top_indices = similarity[0].argsort()[-10:][::-1]
 
         recommendations = self.dataset.iloc[top_indices]
 
-        result = recommendations.to_dict(orient="records")
-
-        return {"output": result}
+        return {"output": recommendations.to_dict(orient="records")}
