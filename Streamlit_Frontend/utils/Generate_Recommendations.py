@@ -1,22 +1,11 @@
-import requests
-import json
+import pandas as pd
+from sklearn.metrics.pairwise import cosine_similarity
 
 class Generator:
-    def __init__(self,nutrition_input:list,ingredients:list=[],params:dict={'n_neighbors':5,'return_distance':False}):
-        self.nutrition_input=nutrition_input
-        self.ingredients=ingredients
-        self.params=params
+    def __init__(self, nutrition_values):
+        self.nutrition_values = nutrition_values
+        self.dataset = pd.read_csv("Data/dataset.csv")
 
-    def set_request(self,nutrition_input:list,ingredients:list,params:dict):
-        self.nutrition_input=nutrition_input
-        self.ingredients=ingredients
-        self.params=params
-
-    def generate(self,):
-        request={
-            'nutrition_input':self.nutrition_input,
-            'ingredients':self.ingredients,
-            'params':self.params
-        }
-        response=requests.post(url='http://backend:8080/predict/',data=json.dumps(request))
-        return response
+    def generate(self):
+        # example logic
+        return self.dataset.sample(5).to_dict(orient="records")
