@@ -6,16 +6,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 @st.cache_data
 def load_dataset():
-
-    df = pd.read_csv(
-        "Data/dataset.csv",
-        encoding="latin1",
-        low_memory=False
-    )
-
-    # Remove spaces from column names
+    df = pd.read_csv("Data/dataset_small.csv")
     df.columns = df.columns.str.strip()
-
     return df
 
 
@@ -37,9 +29,6 @@ class Generator:
             "SugarContent",
             "ProteinContent"
         ]
-
-        # Drop rows with missing nutrition
-        self.dataset = self.dataset.dropna(subset=self.nutrition_cols)
 
         scaler = StandardScaler()
 
