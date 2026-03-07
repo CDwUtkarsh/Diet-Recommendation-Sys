@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics.pairwise import cosine_similarity
+import streamlit as st
 
 
 class Generator:
@@ -8,13 +9,20 @@ class Generator:
     def __init__(self, nutrition_values):
 
         self.nutrition_values = nutrition_values
+        self.dataset = load_dataset()
 
         # Load dataset
-        self.dataset = pd.read_csv(
-            "Data/dataset.csv",
-            encoding="latin1",
-            on_bad_lines="skip"
-        )
+       @st.cache_data
+        def load_dataset():
+            df = pd.read_csv(
+                "Data/dataset.csv",
+                encoding="latin1",
+                sep=",",
+                engine="python",
+                on_bad_lines="skip",
+                quoting=3
+            )
+            return df
 
         # Nutrition columns
         self.nutrition_cols = [
