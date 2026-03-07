@@ -8,7 +8,11 @@ class Generator:
         self.nutrition_values = nutrition_values
         
         # Load dataset
-        self.dataset = pd.read_csv("Data/dataset.csv")
+        self.dataset = pd.read_csv(
+            "Data/dataset.csv",
+            encoding="latin1",
+            engine="python"
+        )
 
         # Nutrition columns
         self.nutrition_cols = [
