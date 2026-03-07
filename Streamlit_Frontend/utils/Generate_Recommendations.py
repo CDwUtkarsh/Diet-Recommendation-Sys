@@ -11,7 +11,8 @@ class Generator:
         self.dataset = pd.read_csv(
             "Data/dataset.csv",
             encoding="latin1",
-            engine="python"
+            engine="python",
+            on_bad_lines="skip"
         )
 
         # Nutrition columns
