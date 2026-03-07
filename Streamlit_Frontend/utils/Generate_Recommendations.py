@@ -12,8 +12,7 @@ class Generator:
             "Data/dataset.csv",
             encoding="latin1",
             engine="python",
-            on_bad_lines="skip",
-            low_memory=False
+            on_bad_lines="skip"
         )
 
         # Nutrition columns
