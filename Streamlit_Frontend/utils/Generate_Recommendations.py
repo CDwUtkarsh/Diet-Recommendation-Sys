@@ -6,7 +6,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 @st.cache_data
 def load_dataset():
-    df = pd.read_csv("Data/dataset_small.csv")
+    df = pd.read_csv("Data/dataset.csv")
     df.columns = df.columns.str.strip()
     return df
 
