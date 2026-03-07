@@ -12,17 +12,17 @@ class Generator:
         self.dataset = load_dataset()
 
         # Load dataset
-       @st.cache_data
-        def load_dataset():
-            df = pd.read_csv(
-                "Data/dataset.csv",
-                encoding="latin1",
-                sep=",",
-                engine="python",
-                on_bad_lines="skip",
-                quoting=3
-            )
-            return df
+    @st.cache_data
+    def load_dataset():
+        df = pd.read_csv(
+            "Data/dataset.csv",
+            encoding="latin1",
+            sep=",",
+            engine="python",
+            on_bad_lines="skip",
+            quoting=3
+        )
+        return df
 
         # Nutrition columns
         self.nutrition_cols = [
