@@ -108,42 +108,98 @@ class Display:
             with col:
                 st.metric(label=plan,value=f'{round(maintain_calories*weight)} Calories/day',delta=loss,delta_color="inverse")
 
-    def display_recommendation(self,person,recommendations):
-        st.header('DIET RECOMMENDATOR')
-        with st.spinner('Generating recommendations...'):
-            meals=person.meals_calories_perc
-            st.subheader('Recommended recipes:')
-            for meal_name,column,recommendation in zip(meals,st.columns(len(meals)),recommendations):
-                with column:
-                    #st.markdown(f'<div style="text-align: center;">{meal_name.upper()}</div>', unsafe_allow_html=True)
-                    st.markdown(f'##### {meal_name.upper()}')
-                    for recipe in recommendation:
+    def display_recommendation(self, person, recommendations):
 
-                        recipe_name=recipe['Name']
-                        expander = st.expander(recipe_name)
-                        recipe_link=recipe['image_link']
-                        recipe_img=f'<div><center><img src={recipe_link} alt={recipe_name}></center></div>'
-                        nutritions_df=pd.DataFrame({value:[recipe[value]] for value in nutritions_values})
+        st.header("🥗 DIET RECOMMENDATOR")
 
-                        expander.markdown(recipe_img,unsafe_allow_html=True)
-                        expander.markdown(f'<h5 style="text-align: center;font-family:sans-serif;">Nutritional Values (g):</h5>', unsafe_allow_html=True)
-                        expander.dataframe(nutritions_df)
-                        expander.markdown(f'<h5 style="text-align: center;font-family:sans-serif;">Ingredients:</h5>', unsafe_allow_html=True)
-                        for ingredient in recipe['RecipeIngredientParts']:
-                            expander.markdown(f"""
-                                        - {ingredient}
-                            """)
-                        expander.markdown(f'<h5 style="text-align: center;font-family:sans-serif;">Recipe Instructions:</h5>', unsafe_allow_html=True)
-                        for instruction in recipe['RecipeInstructions']:
-                            expander.markdown(f"""
-                                        - {instruction}
-                            """)
-                        expander.markdown(f'<h5 style="text-align: center;font-family:sans-serif;">Cooking and Preparation Time:</h5>', unsafe_allow_html=True)
-                        expander.markdown(f"""
-                                - Cook Time       : {recipe['CookTime']}min
-                                - Preparation Time: {recipe['PrepTime']}min
-                                - Total Time      : {recipe['TotalTime']}min
-                            """)
+        meals = person.meals_calories_perc
+        st.subheader("Recommended recipes:")
+
+        for meal_name, column, recommendation in zip(meals, st.columns(len(meals)), recommendations):
+
+            with column:
+
+                st.markdown(f"##### {meal_name.upper()}")
+
+                for recipe in recommendation:
+
+                    recipe_name = recipe["Name"]
+
+                    expander = st.expander(recipe_name)
+
+                    recipe_link = recipe["image_link"]
+
+                    recipe_img = f"""
+                    <div style="text-align:center">
+                        <img src="{recipe_link}" width="250">
+                    </div>
+                    """
+
+                    nutritions_df = pd.DataFrame(
+                        {value: [recipe[value]] for value in nutritions_values}
+                    )
+
+                    expander.markdown(recipe_img, unsafe_allow_html=True)
+
+                    expander.markdown(
+                        "<h5 style='text-align:center'>Nutritional Values (g)</h5>",
+                        unsafe_allow_html=True,
+                    )
+
+                    expander.dataframe(nutritions_df)
+
+                    # ---------------- INGREDIENTS FIX ---------------- #
+
+                    expander.markdown(
+                        "<h5 style='text-align:center'>Ingredients</h5>",
+                        unsafe_allow_html=True,
+                    )
+
+                    ingredients = recipe["RecipeIngredientParts"]
+
+                    if isinstance(ingredients, str):
+
+                        ingredients = ingredients.replace("c(", "").replace(")", "")
+                        ingredients = ingredients.replace('"', "")
+
+                        ingredients = [i.strip() for i in ingredients.split(",")]
+
+                    for ingredient in ingredients:
+                        expander.markdown(f"- {ingredient}")
+
+                    # ---------------- INSTRUCTIONS FIX ---------------- #
+
+                    expander.markdown(
+                        "<h5 style='text-align:center'>Recipe Instructions</h5>",
+                        unsafe_allow_html=True,
+                    )
+
+                    instructions = recipe["RecipeInstructions"]
+
+                    if isinstance(instructions, str):
+
+                        instructions = instructions.replace("c(", "").replace(")", "")
+                        instructions = instructions.replace('"', "")
+
+                        instructions = [i.strip() for i in instructions.split(",")]
+
+                    for instruction in instructions:
+                        expander.markdown(f"- {instruction}")
+
+                    # ---------------- TIME ---------------- #
+
+                    expander.markdown(
+                        "<h5 style='text-align:center'>Cooking Time</h5>",
+                        unsafe_allow_html=True,
+                    )
+
+                    expander.markdown(
+                        f"""
+    - Cook Time : {recipe['CookTime']}  
+    - Preparation Time : {recipe['PrepTime']}  
+    - Total Time : {recipe['TotalTime']}
+    """
+                    )
 
     def display_meal_choices(self,person,recommendations):
         st.subheader('Choose your meal composition:')

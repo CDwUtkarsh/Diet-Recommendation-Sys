@@ -5,7 +5,8 @@ import pandas as pd
 from model import recommend,output_recommended_recipes
 
 
-self.dataset = pd.read_csv("Data/dataset.csv", encoding="latin1")
+
+dataset=pd.read_csv('../Data/dataset_cleaned.csv')
 
 app = FastAPI()
 
@@ -15,9 +16,8 @@ class params(BaseModel):
     return_distance:bool=False
 
 class PredictionIn(BaseModel):
-    nutrition_input:conlist(float, min_items=9, max_items=9)
-    ingredients:list[str]=[]
-    params:Optional[params]
+    nutrition_input: conlist(float, min_length=9, max_length=9)
+    params: Optional[dict]
 
 
 class Recipe(BaseModel):
@@ -54,3 +54,4 @@ def update_item(prediction_input:PredictionIn):
         return {"output":None}
     else:
         return {"output":output}
+

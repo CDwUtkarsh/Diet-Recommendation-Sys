@@ -1,104 +1,129 @@
-<<<<<<< HEAD
 # 🥗 NutriGenie – AI Diet Recommendation System
 
-NutriGenie is an **AI-powered diet recommendation system** that generates personalized meal plans based on a user's body metrics, activity level, and weight goals.
+**NutriGenie** is an AI-powered diet recommendation system that generates personalized meal plans based on a user's body metrics, activity level, and weight goals.
 
-The application uses **Machine Learning, FastAPI, and Streamlit** to recommend healthy meals and visualize nutritional information.
+The application uses **Machine Learning, FastAPI, and Streamlit** to recommend healthy meals, visualize nutritional information, and provide recipe guidance.
 
 ---
 
 # 🚀 Features
 
-✅ Automatic diet recommendation  
-✅ BMI calculator  
-✅ Daily calorie estimation  
-✅ Personalized meal plans  
-✅ Nutritional values visualization  
-✅ Recipe ingredients and instructions  
-✅ Meal image preview  
-✅ Interactive nutrition charts  
+✅ Personalized diet recommendations
+✅ BMI calculator
+✅ Daily calorie requirement estimation
+✅ AI-powered meal recommendations
+✅ Recipe ingredients & cooking instructions
+✅ Nutrition value breakdown
+✅ Meal image preview
+✅ Interactive nutrition charts
 
 ---
 
 # 🧠 Tech Stack
 
-| Technology | Purpose |
-|-----------|--------|
-| Python | Core programming language |
-| Streamlit | Frontend UI |
-| FastAPI | Backend API |
-| Scikit-Learn | Recommendation model |
-| Pandas | Data processing |
-| Docker | Containerization |
-| Streamlit ECharts | Data visualization |
+| Technology            | Purpose                   |
+| --------------------- | ------------------------- |
+| **Python**            | Core programming language |
+| **Streamlit**         | Frontend web interface    |
+| **FastAPI**           | Backend API               |
+| **Scikit-Learn**      | Recommendation model      |
+| **Pandas**            | Data processing           |
+| **Streamlit ECharts** | Nutrition visualization   |
 
 ---
 
-# 🏗 Project Architecture
+# 🏗 System Architecture
 
-User Input (Age, Height, Weight)
+User Input (Age, Height, Weight, Activity Level)
 ↓
-Streamlit UI
+Streamlit Frontend (User Interface)
 ↓
-FastAPI Backend
+FastAPI Backend (API)
 ↓
-Machine Learning Model
+Machine Learning Recommendation Model
 ↓
 Recipe Recommendation Engine
 ↓
 Nutrition Visualization
 
-
 ---
 
 # 📂 Project Structure
+
+```
 Diet-Recommendation-System
 │
 ├── FastAPI_Backend
-│ └── main.py
+│   └── main.py
 │
 ├── Streamlit_Frontend
-│ ├── Hello.py
-│ ├── pages
-│ │ ├── Diet_Recommendation.py
-│ │ └── Custom_Food_Recommendation.py
+│   ├── Hello.py
+│   ├── pages
+│   │   ├── Diet_Recommendation.py
+│   │   └── Custom_Food_Recommendation.py
 │
 ├── utils
-│ └── Generate_Recommendations.py
+│   └── Generate_Recommendations.py
 │
 ├── ImageFinder
-│ └── ImageFinder.py
+│   └── ImageFinder.py
 │
 ├── Data
-│ └── dataset.csv
+│   └── dataset.csv
 │
-├── docker-compose.yml
 ├── requirements.txt
 └── README.md
+```
 
 ---
 
 # ⚙️ Installation
 
-### 1️⃣ Clone repository
-git clone https://github.com/YOUR_USERNAME/Diet-Recommendation-System.git
+## 1️⃣ Clone Repository
+
+```
+git clone https://github.com/CDwUtkarsh/Diet-Recommendation-System.git
 
 cd Diet-Recommendation-System
+```
 
 ---
 
-### 2️⃣ Run using Docker
-docker compose up --build
+## 2️⃣ Install Dependencies
+
+```
+pip install -r requirements.txt
+```
 
 ---
 
-### 3️⃣ Open Application
+## 3️⃣ Run FastAPI Backend
 
-Streamlit App
-http://localhost:8502
+```
+cd FastAPI_Backend
 
-FastAPI Docs
-http://localhost:8000/docs
+uvicorn main:app --reload
+```
+
+FastAPI API docs will be available at:
+
+```
+http://127.0.0.1:8000/docs
+```
+
+---
+
+## 4️⃣ Run Streamlit Frontend
+
+```
+streamlit run Streamlit_Frontend/Hello.py
+```
+
+Streamlit app will run at:
+
+```
+http://localhost:8501
+```
 
 ---
 
@@ -106,20 +131,21 @@ http://localhost:8000/docs
 
 The system generates:
 
-• Personalized diet plans  
-• Recommended meals  
-• Nutrition breakdown  
+• Personalized diet plans
+• Recommended meals
+• Nutrition breakdown
 • Calories comparison chart
+• Recipe ingredients and instructions
 
 ---
 
 # 🎯 Future Improvements
 
-- AI nutrition chatbot
-- Macro nutrient optimization
-- Mobile responsive UI
-- Food preference filtering
-- Weekly meal planner
+* AI nutrition chatbot
+* Weekly meal planner
+* Macro nutrient optimization
+* Food preference filtering
+* Mobile responsive UI
 
 ---
 
@@ -127,154 +153,11 @@ The system generates:
 
 **Utkarsh Tiwari**
 
-GitHub  
+GitHub
 https://github.com/CDwUtkarsh
 
 ---
 
-# ⭐ If you like this project
+# ⭐ Support
 
-Give it a ⭐ on GitHub!
-
-
-=======
-# 🥗 NutriGenie – AI Diet Recommendation System
-
-NutriGenie is an **AI-powered diet recommendation system** that generates personalized meal plans based on a user's body metrics, activity level, and weight goals.
-
-The application uses **Machine Learning, FastAPI, and Streamlit** to recommend healthy meals and visualize nutritional information.
-
----
-
-# 🚀 Features
-
-✅ Automatic diet recommendation  
-✅ BMI calculator  
-✅ Daily calorie estimation  
-✅ Personalized meal plans  
-✅ Nutritional values visualization  
-✅ Recipe ingredients and instructions  
-✅ Meal image preview  
-✅ Interactive nutrition charts  
-
----
-
-# 🧠 Tech Stack
-
-| Technology | Purpose |
-|-----------|--------|
-| Python | Core programming language |
-| Streamlit | Frontend UI |
-| FastAPI | Backend API |
-| Scikit-Learn | Recommendation model |
-| Pandas | Data processing |
-| Docker | Containerization |
-| Streamlit ECharts | Data visualization |
-
----
-
-# 🏗 Project Architecture
-
-User Input (Age, Height, Weight)
-↓
-Streamlit UI
-↓
-FastAPI Backend
-↓
-Machine Learning Model
-↓
-Recipe Recommendation Engine
-↓
-Nutrition Visualization
-
-
----
-
-# 📂 Project Structure
-Diet-Recommendation-System
-│
-├── FastAPI_Backend
-│ └── main.py
-│
-├── Streamlit_Frontend
-│ ├── Hello.py
-│ ├── pages
-│ │ ├── Diet_Recommendation.py
-│ │ └── Custom_Food_Recommendation.py
-│
-├── utils
-│ └── Generate_Recommendations.py
-│
-├── ImageFinder
-│ └── ImageFinder.py
-│
-├── Data
-│ └── dataset.csv
-│
-├── docker-compose.yml
-├── requirements.txt
-└── README.md
-
----
-
-# ⚙️ Installation
-
-### 1️⃣ Clone repository
-git clone https://github.com/YOUR_USERNAME/Diet-Recommendation-System.git
-
-cd Diet-Recommendation-System
-
----
-
-### 2️⃣ Run using Docker
-docker compose up --build
-
----
-
-### 3️⃣ Open Application
-
-Streamlit App
-http://localhost:8502
-
-FastAPI Docs
-http://localhost:8000/docs
-
----
-
-# 📊 Example Output
-
-The system generates:
-
-• Personalized diet plans  
-• Recommended meals  
-• Nutrition breakdown  
-• Calories comparison chart
-
----
-
-# 🎯 Future Improvements
-
-- AI nutrition chatbot
-- Macro nutrient optimization
-- Mobile responsive UI
-- Food preference filtering
-- Weekly meal planner
-
----
-
-# 👨‍💻 Author
-
-**Utkarsh Tiwari**
-
-GitHub  
-https://github.com/CDwUtkarsh
-
----
-
-# ⭐ If you like this project
-
-Give it a ⭐ on GitHub!
-
-
-
->>>>>>> 277fdbe (fix dataset encoding issue for streamlit cloud)
+If you like this project, please consider giving it a ⭐ on GitHub.

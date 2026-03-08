@@ -4,8 +4,6 @@ numpy
 scikit-learn
 streamlit-echarts
 requests
-<<<<<<< HEAD
 beautifulsoup4
-=======
-beautifulsoup4
->>>>>>> 277fdbe (fix dataset encoding issue for streamlit cloud)
+uvicorn
+fastapi uvicorn
