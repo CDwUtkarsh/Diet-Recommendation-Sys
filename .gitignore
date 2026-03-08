@@ -1,5 +1,6 @@
 Data/
 *.csv
-venv/
-.env
+*.gz
+venv
 __pycache__/
+*.pyc
