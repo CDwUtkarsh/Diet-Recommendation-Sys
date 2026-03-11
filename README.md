@@ -1,8 +1,14 @@
-🥗 NutriGenie – AI Diet Recommendation System
 
-NutriGenie is an AI-powered diet recommendation system that generates personalized meal plans based on a user's body metrics, activity level, and weight goals.
 
-The application leverages Machine Learning, FastAPI, and Streamlit to recommend healthy meals, analyze nutritional values, and provide recipe guidance in an interactive interface
+---
+
+# 🥗 NutriGenie – AI Diet Recommendation System
+
+**NutriGenie** is an AI-powered diet recommendation system that generates personalized meal plans based on a user's body metrics, activity level, and weight goals.
+
+The application leverages **Machine Learning, FastAPI, and Streamlit** to recommend healthy meals, analyze nutritional values, and provide recipe guidance in an interactive interface.
+
+---
 
 # 🚀 Features
 
@@ -163,5 +169,3 @@ GitHub:
 If you found this project helpful, please consider giving it a **⭐ on GitHub**.
 
 ---
-
-
