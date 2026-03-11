@@ -1,6 +1,11 @@
+notepad .gitignore
+```
+
+**Ye content daalo aur save karo:**
+```
 Data/
-*.csv
-*.gz
-venv
+venv/
 __pycache__/
 *.pyc
+*.jar
+*.csv
