@@ -1,6 +1,3 @@
-Tumhara README already **achha hai**, lekin thoda polish karne se **GitHub pe zyada professional lagega** (especially recruiters ke liye).
-Maine **structure, grammar, headings aur clarity improve karke updated version** bana diya hai.
-
 ---
 
 # 🥗 NutriGenie – AI Diet Recommendation System
