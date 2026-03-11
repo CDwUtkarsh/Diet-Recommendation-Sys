@@ -6,7 +6,25 @@
 
 **NutriGenie** is an AI-powered diet recommendation system that generates personalized meal plans based on a user's body metrics, activity level, and weight goals.
 
-The application leverages **Machine Learning, FastAPI, and Streamlit** to recommend healthy meals, analyze nutritional values, and provide recipe guidance in an interactive interface.
+The application leverages **Machine Learning, FastAPI, and Streamlit** to recommend healthy meals, analyze nutritional values, and provide recipe guidance through an interactive interface.
+
+---
+
+# 🌐 Live Demo
+
+🚀 **Try the App**
+
+[https://diet-recommendation-sys-zjmv4fwfsuzjx2aykux6wf.streamlit.app/](https://diet-recommendation-sys-zjmv4fwfsuzjx2aykux6wf.streamlit.app/)
+
+---
+
+# 📊 Dataset
+
+The system uses a cleaned food dataset containing recipe information and nutritional values.
+
+📁 Dataset Source:
+
+[https://huggingface.co/datasets/utkarsh121254/diet-recommendation-dataset/resolve/main/dataset_cleaned.csv](https://huggingface.co/datasets/utkarsh121254/diet-recommendation-dataset/resolve/main/dataset_cleaned.csv)
 
 ---
 
@@ -25,14 +43,14 @@ The application leverages **Machine Learning, FastAPI, and Streamlit** to recomm
 
 # 🧠 Tech Stack
 
-| Technology            | Purpose                                      |
-| --------------------- | -------------------------------------------- |
-| **Python**            | Core programming language                    |
-| **Streamlit**         | Frontend user interface                      |
-| **FastAPI**           | Backend API for recommendation logic         |
-| **Scikit-Learn**      | Machine learning based recommendation engine |
-| **Pandas**            | Data preprocessing and analysis              |
-| **Streamlit ECharts** | Interactive data visualization               |
+| Technology            | Purpose                                |
+| --------------------- | -------------------------------------- |
+| **Python**            | Core programming language              |
+| **Streamlit**         | Frontend user interface                |
+| **FastAPI**           | Backend API                            |
+| **Scikit-Learn**      | Machine learning recommendation engine |
+| **Pandas**            | Data preprocessing and analysis        |
+| **Streamlit ECharts** | Interactive visualization              |
 
 ---
 
@@ -111,7 +129,7 @@ cd FastAPI_Backend
 uvicorn main:app --reload
 ```
 
-FastAPI API documentation will be available at:
+FastAPI API documentation:
 
 ```
 http://127.0.0.1:8000/docs
@@ -125,7 +143,7 @@ http://127.0.0.1:8000/docs
 streamlit run Streamlit_Frontend/Hello.py
 ```
 
-The Streamlit application will start at:
+App will run at:
 
 ```
 http://localhost:8501
@@ -147,11 +165,11 @@ The system generates:
 
 # 🎯 Future Improvements
 
-* 🤖 AI-powered nutrition chatbot
+* 🤖 AI nutrition chatbot
 * 📅 Weekly meal planner
 * ⚖ Macro-nutrient optimization
 * 🥗 Food preference & allergy filtering
-* 📱 Fully mobile responsive UI
+* 📱 Mobile responsive UI
 
 ---
 
@@ -159,13 +177,15 @@ The system generates:
 
 **Utkarsh Tiwari**
 
-GitHub:
+GitHub
 [https://github.com/CDwUtkarsh](https://github.com/CDwUtkarsh)
 
 ---
 
 # ⭐ Support
 
-If you found this project helpful, please consider giving it a **⭐ on GitHub**.
+If you found this project useful, please consider giving it a **⭐ on GitHub**.
 
 ---
+
+
