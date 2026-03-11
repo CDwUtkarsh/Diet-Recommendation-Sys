@@ -6,7 +6,7 @@ from model import recommend,output_recommended_recipes
 
 
 
-dataset=pd.read_csv('../Data/dataset_cleaned.csv')
+dataset=pd.read_csv("https://huggingface.co/datasets/utkarsh121254/diet-recommendation-dataset/resolve/main/dataset_cleaned.csv")
 
 app = FastAPI()
 
