@@ -7,6 +7,7 @@ from streamlit_echarts import st_echarts
 
 st.set_page_config(page_title="Automatic Diet Recommendation", page_icon="💪", layout="wide")
 
+# ── RESPONSIVE CSS ─────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap');
@@ -29,16 +30,21 @@ section[data-testid="stMain"] > div { padding-top: 0 !important; }
 
 /* ── PAGE HEADER ── */
 .page-header {
-    padding: 36px 48px 28px;
+    padding: clamp(20px, 4vw, 36px) clamp(16px, 4vw, 48px) clamp(16px, 3vw, 28px);
     border-bottom: 1px solid rgba(255,255,255,0.06);
     background: linear-gradient(135deg, rgba(34,197,94,0.06) 0%, transparent 60%);
 }
 .page-header h1 {
     font-family: 'Nunito', sans-serif;
-    font-size: 38px; font-weight: 900;
+    font-size: clamp(22px, 5vw, 38px);
+    font-weight: 900;
     letter-spacing: -1.5px; color: #f8fafc; margin: 0;
 }
-.page-header p { color: rgba(255,255,255,0.4) !important; font-size: 14px; margin-top: 6px; }
+.page-header p {
+    color: rgba(255,255,255,0.4) !important;
+    font-size: clamp(12px, 2vw, 14px);
+    margin-top: 6px;
+}
 
 /* ── NUMBER INPUT — force dark bg + white text ── */
 input[type="number"],
@@ -52,6 +58,7 @@ input[type="text"],
     font-weight: 600 !important;
     -webkit-text-fill-color: #ffffff !important;
     caret-color: #22c55e !important;
+    width: 100% !important;
 }
 input[type="number"]:focus,
 [data-testid="stNumberInput"] input:focus {
@@ -59,7 +66,6 @@ input[type="number"]:focus,
     box-shadow: 0 0 0 2px rgba(34,197,94,0.2) !important;
     outline: none !important;
 }
-
 
 /* ── SELECT BOX ── */
 div[data-baseweb="select"] > div {
@@ -73,7 +79,6 @@ div[data-baseweb="select"] > div:focus-within {
     border-color: rgba(34,197,94,0.5) !important;
     box-shadow: 0 0 0 2px rgba(34,197,94,0.12) !important;
 }
-/* Only text spans — NOT all divs */
 div[data-baseweb="select"] span {
     color: #ffffff !important;
     -webkit-text-fill-color: #ffffff !important;
@@ -86,33 +91,23 @@ div[data-baseweb="select"] input {
 div[data-baseweb="select"] svg { fill: rgba(255,255,255,0.55) !important; }
 
 /* ── SELECTBOX DROPDOWN FIX ── */
-
-/* dropdown container */
 div[data-baseweb="popover"] {
     background: #111520 !important;
     border: 1px solid rgba(255,255,255,0.1) !important;
     border-radius: 10px !important;
 }
-
-/* dropdown menu */
 div[data-baseweb="menu"] {
     background: #111520 !important;
 }
-
-/* dropdown options */
 div[data-baseweb="menu"] li {
     background: transparent !important;
     color: rgba(255,255,255,0.85) !important;
     font-size: 14px !important;
 }
-
-/* hover effect */
 div[data-baseweb="menu"] li:hover {
     background: rgba(34,197,94,0.12) !important;
     color: #22c55e !important;
 }
-
-/* selected option */
 div[data-baseweb="menu"] li[aria-selected="true"] {
     background: rgba(34,197,94,0.15) !important;
     color: #22c55e !important;
@@ -131,7 +126,7 @@ label[data-testid="stWidgetLabel"] {
     color: rgba(255,255,255,0.75) !important;
 }
 
-/* ── SELECT SLIDER — prevent overlap ── */
+/* ── SELECT SLIDER ── */
 [data-testid="stSlider"] {
     padding-bottom: 4px !important;
 }
@@ -139,18 +134,14 @@ label[data-testid="stWidgetLabel"] {
     background-color: #22c55e !important;
     border-color: #22c55e !important;
 }
-/* Active value label */
 [data-testid="stSlider"] [data-testid="stMarkdownContainer"] p {
     color: #22c55e !important; font-weight: 700 !important; font-size: 13px !important;
 }
-/* Min/max tick labels - small, no overflow */
 [data-testid="stSlider"] [class*="StyledThumbValue"],
 [data-testid="stSlider"] small {
     color: rgba(255,255,255,0.35) !important;
     font-size: 10px !important;
 }
-
-/* ── REGULAR SLIDER ── */
 [data-testid="stSlider"] [data-baseweb="slider"] [role="slider"] {
     background: #22c55e !important; border-color: #22c55e !important;
 }
@@ -163,7 +154,8 @@ label[data-testid="stWidgetLabel"] {
     padding: 14px 28px !important; font-size: 15px !important;
     font-weight: 800 !important; font-family: 'Nunito', sans-serif !important;
     box-shadow: 0 4px 20px rgba(34,197,94,0.3) !important;
-    transition: all 0.2s !important; width: auto !important;
+    transition: all 0.2s !important;
+    width: 100% !important;
 }
 [data-testid="stFormSubmitButton"] > button:hover {
     transform: translateY(-2px) !important;
@@ -200,10 +192,11 @@ label[data-testid="stWidgetLabel"] {
 /* ── SECTION HELPERS ── */
 .section-title {
     font-family: 'Nunito', sans-serif;
-    font-size: 22px; font-weight: 900; color: #f8fafc; letter-spacing: -0.5px;
+    font-size: clamp(18px, 3vw, 22px);
+    font-weight: 900; color: #f8fafc; letter-spacing: -0.5px;
 }
 .sec-div {
-    height: 1px; margin: 32px 48px 28px;
+    height: 1px; margin: clamp(16px, 3vw, 32px) clamp(8px, 3vw, 48px) clamp(14px, 2.5vw, 28px);
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
 }
 .form-section-label {
@@ -218,26 +211,38 @@ label[data-testid="stWidgetLabel"] {
 /* ── BMI CARD ── */
 .bmi-card {
     background: #111824; border: 1px solid rgba(255,255,255,0.09);
-    border-radius: 18px; padding: 24px 28px; position: relative; overflow: hidden;
+    border-radius: 18px; padding: clamp(14px, 2vw, 24px) clamp(14px, 2.5vw, 28px);
+    position: relative; overflow: hidden; margin: 0 !important;
 }
 .bmi-card::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
     background: linear-gradient(90deg, transparent, rgba(34,197,94,0.4), transparent);
 }
 .bmi-value {
-    font-family: 'Nunito', sans-serif; font-size: 42px;
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(28px, 5vw, 42px);
     font-weight: 900; letter-spacing: -2px; color: #f8fafc;
 }
 
 /* ── CALORIE CARDS ── */
 .cal-card {
     background: #111824; border: 1px solid rgba(255,255,255,0.09);
-    border-radius: 16px; padding: 20px 22px; text-align: center; transition: border-color 0.2s;
+    border-radius: 16px; padding: clamp(12px, 2vw, 20px) clamp(10px, 2vw, 22px);
+    text-align: center; transition: border-color 0.2s;
+    margin-bottom: 10px;
 }
 .cal-card:hover { border-color: rgba(34,197,94,0.28); }
-.cal-card-label { font-size:12px; color:rgba(255,255,255,0.42); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; font-weight:600; }
-.cal-card-value { font-family:'Nunito',sans-serif; font-size:26px; font-weight:900; color:#22c55e; letter-spacing:-1px; }
-.cal-card-delta { font-size:12px; color:rgba(255,255,255,0.32); margin-top:4px; }
+.cal-card-label {
+    font-size: clamp(10px, 1.5vw, 12px);
+    color: rgba(255,255,255,0.42); text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 8px; font-weight: 600;
+}
+.cal-card-value {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(18px, 3vw, 26px);
+    font-weight: 900; color: #22c55e; letter-spacing: -1px;
+}
+.cal-card-delta { font-size: clamp(10px, 1.5vw, 12px); color: rgba(255,255,255,0.32); margin-top: 4px; }
 
 /* ── MEAL BADGES ── */
 .meal-badge {
@@ -246,34 +251,91 @@ label[data-testid="stWidgetLabel"] {
     font-size: 11px; font-weight: 700; text-transform: uppercase;
     letter-spacing: 1.5px; margin-bottom: 14px;
 }
-.badge-b { background:rgba(251,191,36,0.12); color:#fbbf24; border:1px solid rgba(251,191,36,0.2); }
-.badge-l { background:rgba(59,130,246,0.12);  color:#60a5fa; border:1px solid rgba(59,130,246,0.2); }
-.badge-d { background:rgba(167,139,250,0.12); color:#a78bfa; border:1px solid rgba(167,139,250,0.2); }
-.badge-s { background:rgba(251,113,133,0.12); color:#fb7185; border:1px solid rgba(251,113,133,0.2); }
+.badge-b { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
+.badge-l { background: rgba(59,130,246,0.12);  color: #60a5fa; border: 1px solid rgba(59,130,246,0.2); }
+.badge-d { background: rgba(167,139,250,0.12); color: #a78bfa; border: 1px solid rgba(167,139,250,0.2); }
+.badge-s { background: rgba(251,113,133,0.12); color: #fb7185; border: 1px solid rgba(251,113,133,0.2); }
 
 /* ── NUTRITION PILLS ── */
-.nut-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:10px 0 16px; }
-.nut-pill {
-    background:rgba(34,197,94,0.07); border:1px solid rgba(34,197,94,0.16);
-    border-radius:10px; padding:10px 8px; text-align:center;
+.nut-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px; margin: 10px 0 16px;
 }
-.nut-val { font-family:'Nunito',sans-serif; font-size:16px; font-weight:800; color:#4ade80; }
-.nut-key { font-size:9px; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:0.5px; margin-top:2px; }
+.nut-pill {
+    background: rgba(34,197,94,0.07); border: 1px solid rgba(34,197,94,0.16);
+    border-radius: 10px; padding: 10px 8px; text-align: center;
+}
+.nut-val { font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 800; color: #4ade80; }
+.nut-key { font-size: 9px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
 
 /* ── CAL HERO ── */
 .cal-hero {
-    background:linear-gradient(135deg,rgba(34,197,94,0.1),rgba(16,185,129,0.05));
-    border:1px solid rgba(34,197,94,0.2); border-radius:18px;
-    padding:28px 36px; text-align:center; margin:16px 0;
+    background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(16,185,129,0.05));
+    border: 1px solid rgba(34,197,94,0.2); border-radius: 18px;
+    padding: clamp(16px, 3vw, 28px) clamp(14px, 3vw, 36px);
+    text-align: center; margin: 16px 0;
 }
-.cal-hero-label { font-size:12px; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:2px; margin-bottom:6px; font-weight:600; }
-.cal-hero-val { font-family:'Nunito',sans-serif; font-size:52px; font-weight:900; color:#22c55e; letter-spacing:-3px; line-height:1; }
-.cal-hero-unit { font-size:18px; color:rgba(255,255,255,0.35); font-weight:400; }
+.cal-hero-label {
+    font-size: clamp(10px, 1.5vw, 12px);
+    color: rgba(255,255,255,0.4); text-transform: uppercase;
+    letter-spacing: 2px; margin-bottom: 6px; font-weight: 600;
+}
+.cal-hero-val {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(34px, 7vw, 52px);
+    font-weight: 900; color: #22c55e; letter-spacing: -3px; line-height: 1;
+}
+.cal-hero-unit { font-size: clamp(14px, 2vw, 18px); color: rgba(255,255,255,0.35); font-weight: 400; }
 
 /* ── DATAFRAME ── */
-[data-testid="stDataFrame"] { border-radius:12px !important; overflow:hidden !important; }
-[data-testid="stDataFrame"] th { background:rgba(34,197,94,0.1) !important; color:rgba(255,255,255,0.7) !important; }
-[data-testid="stDataFrame"] td { color:rgba(255,255,255,0.75) !important; background:#111824 !important; }
+[data-testid="stDataFrame"] { border-radius: 12px !important; overflow: hidden !important; }
+[data-testid="stDataFrame"] th { background: rgba(34,197,94,0.1) !important; color: rgba(255,255,255,0.7) !important; }
+[data-testid="stDataFrame"] td { color: rgba(255,255,255,0.75) !important; background: #111824 !important; }
+
+/* ── RECIPE IMAGE ── */
+.recipe-img {
+    width: 100%;
+    max-width: 220px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: block;
+    margin: 0 auto 12px;
+}
+
+/* ── RESPONSIVE: MOBILE OVERRIDES ── */
+@media (max-width: 640px) {
+    .page-header { padding: 20px 16px 16px; }
+    .page-header h1 { font-size: 22px; letter-spacing: -0.5px; }
+    .sec-div { margin: 16px 8px 14px; }
+    .bmi-card { margin: 0 8px !important; }
+    .nut-grid { grid-template-columns: repeat(2, 1fr); }
+    .cal-hero-val { font-size: 36px; }
+    [data-testid="stFormSubmitButton"] > button { padding: 12px 20px !important; font-size: 14px !important; }
+}
+
+/* ── STACKED FORM WRAPPER ── */
+.form-wrap {
+    padding: 0 clamp(8px, 3vw, 48px);
+}
+
+/* ── ENSURE COLUMNS FLOW on narrow screens ── */
+[data-testid="stHorizontalBlock"] {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+}
+[data-testid="stHorizontalBlock"] > div {
+    min-width: 140px !important;
+    flex: 1 1 140px !important;
+}
+
+/* Prevent horizontal overflow */
+.main .block-container {
+    max-width: 100% !important;
+    padding-left: clamp(8px, 3vw, 48px) !important;
+    padding-right: clamp(8px, 3vw, 48px) !important;
+    overflow-x: hidden !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -288,7 +350,7 @@ if 'person' not in st.session_state:
     st.session_state.person = None
     st.session_state.weight_loss_option = None
 
-# ── PERSON CLASS (logic unchanged) ────────────────────────────────────────────
+# ── PERSON CLASS ───────────────────────────────────────────────────────────────
 class Person:
     def __init__(self, age, height, weight, gender, activity, meals_calories_perc, weight_loss):
         self.age = age; self.height = height; self.weight = weight
@@ -338,6 +400,7 @@ class Person:
                 recipe['image_link'] = find_image(recipe['Name'])
         return recommendations
 
+
 # ── DISPLAY CLASS ──────────────────────────────────────────────────────────────
 class Display:
     def __init__(self):
@@ -348,11 +411,18 @@ class Display:
     def display_bmi(self, person):
         bmi_string, category, color = person.display_result()
         st.markdown('<div class="sec-div"></div>', unsafe_allow_html=True)
-        st.markdown('<div style="margin:0 48px 20px;"><span class="section-title">📊 BMI Calculator</span><br><span style="font-size:13px;color:rgba(255,255,255,0.38);">Your Body Mass Index based on height & weight</span></div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div style="margin:0 0 20px;">'
+            '<span class="section-title">📊 BMI Calculator</span><br>'
+            '<span style="font-size:13px;color:rgba(255,255,255,0.38);">Your Body Mass Index based on height & weight</span>'
+            '</div>',
+            unsafe_allow_html=True
+        )
+        # ── Responsive: stack on mobile, side-by-side on wider screens ──
         col_bmi, col_info = st.columns([1, 2])
         with col_bmi:
             st.markdown(f"""
-            <div class="bmi-card" style="margin-left:48px;">
+            <div class="bmi-card">
                 <div style="font-size:11px;color:rgba(255,255,255,0.38);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;font-weight:600;">Body Mass Index</div>
                 <div class="bmi-value">{bmi_string.split()[0]} <span style="font-size:16px;color:rgba(255,255,255,0.4);font-weight:400;">kg/m²</span></div>
                 <div style="margin-top:12px;display:inline-block;padding:5px 14px;border-radius:8px;
@@ -361,7 +431,7 @@ class Display:
             </div>""", unsafe_allow_html=True)
         with col_info:
             st.markdown("""
-            <div style="padding:20px 20px 20px 0;font-size:14px;line-height:2.2;">
+            <div style="padding:8px 0;font-size:14px;line-height:2.2;">
                 <div style="color:rgba(255,255,255,0.75);font-weight:700;font-family:'Nunito',sans-serif;font-size:15px;margin-bottom:6px;">BMI Categories</div>
                 <div style="color:rgba(255,255,255,0.5);">🔴 &nbsp;<strong style="color:rgba(255,255,255,0.72);">Underweight</strong> — Below 18.5</div>
                 <div style="color:rgba(255,255,255,0.5);">🟢 &nbsp;<strong style="color:rgba(255,255,255,0.72);">Normal</strong> — 18.5 – 24.9</div>
@@ -373,7 +443,14 @@ class Display:
     def display_calories(self, person):
         maintain_calories = person.calories_calculator()
         st.markdown('<div class="sec-div"></div>', unsafe_allow_html=True)
-        st.markdown('<div style="margin:0 48px 20px;"><span class="section-title">🔥 Calories Calculator</span><br><span style="font-size:13px;color:rgba(255,255,255,0.38);">Daily calorie estimates based on your activity level and goal</span></div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div style="margin:0 0 20px;">'
+            '<span class="section-title">🔥 Calories Calculator</span><br>'
+            '<span style="font-size:13px;color:rgba(255,255,255,0.38);">Daily calorie estimates based on your activity level and goal</span>'
+            '</div>',
+            unsafe_allow_html=True
+        )
+        # ── 4 cards: 2×2 on mobile, 4 across on desktop ──
         cols = st.columns(4)
         for plan, weight, loss, col in zip(self.plans, self.weights, self.losses, cols):
             with col:
@@ -386,7 +463,13 @@ class Display:
 
     def display_recommendation(self, person, recommendations):
         st.markdown('<div class="sec-div"></div>', unsafe_allow_html=True)
-        st.markdown('<div style="margin:0 48px 20px;"><span class="section-title">🥗 Recommended Recipes</span><br><span style="font-size:13px;color:rgba(255,255,255,0.38);">Top 5 personalized recipes for each meal</span></div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div style="margin:0 0 20px;">'
+            '<span class="section-title">🥗 Recommended Recipes</span><br>'
+            '<span style="font-size:13px;color:rgba(255,255,255,0.38);">Top 5 personalized recipes for each meal</span>'
+            '</div>',
+            unsafe_allow_html=True
+        )
 
         meals = person.meals_calories_perc
         badge_map = {
@@ -394,14 +477,33 @@ class Display:
             'morning snack':'badge-s','afternoon snack':'badge-s','launch':'badge-l'
         }
 
-        for meal_name, column, recommendation in zip(meals, st.columns(len(meals)), recommendations):
-            with column:
+        meal_count = len(meals)
+        # ── Responsive column strategy: max 3 on tablet, stack on mobile ──
+        # For 3 meals → 3 cols; for 4+ meals → 2 cols per row to avoid squishing
+        if meal_count <= 3:
+            columns = st.columns(meal_count)
+        else:
+            columns = st.columns(min(meal_count, 3))
+
+        meal_items = list(zip(meals, recommendations))
+
+        # If more meals than columns, we render in groups
+        for idx, (meal_name, recommendation) in enumerate(meal_items):
+            # Wrap to next "row" if needed
+            col_idx = idx % len(columns)
+            if meal_count > 3 and col_idx == 0 and idx > 0:
+                columns = st.columns(min(meal_count - idx, 3))
+
+            with columns[col_idx]:
                 bc = badge_map.get(meal_name, 'badge-s')
                 st.markdown(f'<div class="meal-badge {bc}">{meal_name}</div>', unsafe_allow_html=True)
                 for recipe in recommendation:
                     with st.expander(recipe['Name']):
                         if recipe.get('image_link'):
-                            st.markdown(f'<div style="text-align:center;margin-bottom:12px;"><img src="{recipe["image_link"]}" width="220" style="border-radius:12px;border:1px solid rgba(255,255,255,0.1);"></div>', unsafe_allow_html=True)
+                            st.markdown(
+                                f'<img src="{recipe["image_link"]}" class="recipe-img" alt="{recipe["Name"]}">',
+                                unsafe_allow_html=True
+                            )
 
                         st.markdown(f"""
                         <div class="nut-grid">
@@ -442,27 +544,35 @@ class Display:
 
     def display_meal_choices(self, person, recommendations):
         st.markdown('<div class="sec-div"></div>', unsafe_allow_html=True)
-        st.markdown('<div style="margin:0 48px 20px;"><span class="section-title">🎯 Choose Your Meal Composition</span><br><span style="font-size:13px;color:rgba(255,255,255,0.38);">Select your preferred recipe for each meal</span></div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div style="margin:0 0 20px;">'
+            '<span class="section-title">🎯 Choose Your Meal Composition</span><br>'
+            '<span style="font-size:13px;color:rgba(255,255,255,0.38);">Select your preferred recipe for each meal</span>'
+            '</div>',
+            unsafe_allow_html=True
+        )
 
-        # Logic unchanged
+        # ── Responsive selectboxes: 1 per row on mobile, multi-col on desktop ──
         if len(recommendations) == 3:
-            c1, c2, c3 = st.columns(3)
+            c1, c2, c3 = st.columns([1, 1, 1])
             with c1: b = st.selectbox('Choose your breakfast:',  [r['Name'] for r in recommendations[0]])
             with c2: l = st.selectbox('Choose your launch:',     [r['Name'] for r in recommendations[1]])
             with c3: d = st.selectbox('Choose your dinner:',     [r['Name'] for r in recommendations[2]])
             choices = [b, l, d]
         elif len(recommendations) == 4:
-            c1, c2, c3, c4 = st.columns(4)
+            c1, c2 = st.columns(2)
             with c1: b  = st.selectbox('Choose your breakfast:',     [r['Name'] for r in recommendations[0]])
-            with c2: ms = st.selectbox('Choose your morning_snack:', [r['Name'] for r in recommendations[1]])
+            with c2: ms = st.selectbox('Choose your morning snack:', [r['Name'] for r in recommendations[1]])
+            c3, c4 = st.columns(2)
             with c3: l  = st.selectbox('Choose your launch:',        [r['Name'] for r in recommendations[2]])
             with c4: d  = st.selectbox('Choose your dinner:',        [r['Name'] for r in recommendations[3]])
             choices = [b, ms, l, d]
         else:
-            c1, c2, c3, c4, c5 = st.columns(5)
+            c1, c2, c3 = st.columns(3)
             with c1: b  = st.selectbox('Choose your breakfast:',     [r['Name'] for r in recommendations[0]])
-            with c2: ms = st.selectbox('Choose your morning_snack:', [r['Name'] for r in recommendations[1]])
+            with c2: ms = st.selectbox('Choose your morning snack:', [r['Name'] for r in recommendations[1]])
             with c3: l  = st.selectbox('Choose your launch:',        [r['Name'] for r in recommendations[2]])
+            c4, c5 = st.columns(2)
             with c4: af = st.selectbox('Choose your afternoon:',     [r['Name'] for r in recommendations[3]])
             with c5: d  = st.selectbox('Choose your dinner:',        [r['Name'] for r in recommendations[4]])
             choices = [b, ms, l, af, d]
@@ -483,75 +593,108 @@ class Display:
             <div class="cal-hero-val">{total_calories_chose:.0f} <span class="cal-hero-unit">kcal</span></div>
         </div>""", unsafe_allow_html=True)
 
+        # ── Charts: smaller height on mobile via viewport-aware sizing ──
         st.markdown(f'<p style="text-align:center;color:rgba(255,255,255,0.45);margin:20px 0 8px;">Total Calories vs {st.session_state.weight_loss_option} Target</p>', unsafe_allow_html=True)
+
+        # Bar chart – reduced base height for tighter mobile fit
         st_echarts(options={
             "backgroundColor": "transparent",
-            "xAxis": {"type":"category","data":['Your Selection',f"{st.session_state.weight_loss_option}"],
-                      "axisLabel":{"color":"rgba(255,255,255,0.5)"},"axisLine":{"lineStyle":{"color":"rgba(255,255,255,0.1)"}}},
-            "yAxis": {"type":"value","axisLabel":{"color":"rgba(255,255,255,0.5)"},
-                      "splitLine":{"lineStyle":{"color":"rgba(255,255,255,0.06)"}}},
-            "series": [{"data":[
-                {"value":total_calories_chose,"itemStyle":{"color":["#22c55e","#f87171"][total_calories_chose>loss_calories_chose],"borderRadius":[8,8,0,0]}},
-                {"value":loss_calories_chose,"itemStyle":{"color":"#3b82f6","borderRadius":[8,8,0,0]}}],
-                "type":"bar","barWidth":"40%"}],
-        }, height="400px")
+            "grid": {"containLabel": True, "left": "3%", "right": "3%", "bottom": "5%"},
+            "xAxis": {
+                "type": "category",
+                "data": ['Your Selection', f"{st.session_state.weight_loss_option}"],
+                "axisLabel": {"color": "rgba(255,255,255,0.5)", "fontSize": 12},
+                "axisLine": {"lineStyle": {"color": "rgba(255,255,255,0.1)"}}
+            },
+            "yAxis": {
+                "type": "value",
+                "axisLabel": {"color": "rgba(255,255,255,0.5)", "fontSize": 11},
+                "splitLine": {"lineStyle": {"color": "rgba(255,255,255,0.06)"}}
+            },
+            "series": [{
+                "data": [
+                    {"value": total_calories_chose, "itemStyle": {"color": ["#22c55e","#f87171"][total_calories_chose > loss_calories_chose], "borderRadius": [8,8,0,0]}},
+                    {"value": loss_calories_chose,  "itemStyle": {"color": "#3b82f6", "borderRadius": [8,8,0,0]}}
+                ],
+                "type": "bar", "barWidth": "40%"
+            }],
+        }, height="320px")  # reduced from 400px for better mobile fit
 
         st.markdown('<p style="text-align:center;color:rgba(255,255,255,0.45);margin:20px 0 8px;">Nutritional Breakdown</p>', unsafe_allow_html=True)
+
+        # Donut chart – reduced height
         st_echarts(options={
             "backgroundColor": "transparent",
-            "tooltip": {"trigger":"item"},
-            "legend": {"top":"5%","left":"center","textStyle":{"color":"rgba(255,255,255,0.5)"}},
-            "series": [{"name":"Nutritional Values","type":"pie","radius":["40%","70%"],
-                        "avoidLabelOverlap":False,
-                        "itemStyle":{"borderRadius":10,"borderColor":"#080c10","borderWidth":3},
-                        "label":{"show":False,"position":"center"},
-                        "emphasis":{"label":{"show":True,"fontSize":"40","fontWeight":"bold","color":"white"}},
-                        "labelLine":{"show":False},
-                        "data":[{"value":round(total_nutrition_values[v]),"name":v} for v in total_nutrition_values]}],
-        }, height="500px")
+            "tooltip": {"trigger": "item"},
+            "legend": {"top": "5%", "left": "center", "textStyle": {"color": "rgba(255,255,255,0.5)"}, "itemGap": 8},
+            "series": [{
+                "name": "Nutritional Values",
+                "type": "pie",
+                "radius": ["40%", "68%"],
+                "center": ["50%", "55%"],
+                "avoidLabelOverlap": True,
+                "itemStyle": {"borderRadius": 10, "borderColor": "#080c10", "borderWidth": 3},
+                "label": {"show": False, "position": "center"},
+                "emphasis": {"label": {"show": True, "fontSize": "32", "fontWeight": "bold", "color": "white"}},
+                "labelLine": {"show": False},
+                "data": [{"value": round(total_nutrition_values[v]), "name": v} for v in total_nutrition_values]
+            }],
+        }, height="420px")  # reduced from 500px
 
 
 # ── RENDER ─────────────────────────────────────────────────────────────────────
 display = Display()
 
+# Page Header
 st.markdown("""
 <div class="page-header">
     <h1>🥗 Automatic Diet Recommendation</h1>
     <p>Fill in your body metrics and get a personalized AI-powered meal plan</p>
 </div>""", unsafe_allow_html=True)
 
-st.markdown('<div style="margin:24px 48px 0;"><div class="form-section-label">📋 Your Body Metrics</div>', unsafe_allow_html=True)
+# Form
+st.markdown('<div class="form-section-label" style="margin-top:24px;">📋 Your Body Metrics</div>', unsafe_allow_html=True)
 
 with st.form("recommendation_form"):
+    # ── Row 1: Age, Height, Weight  ──
     col1, col2, col3 = st.columns(3)
     with col1:
         age    = st.number_input('Age',         min_value=2,  max_value=120, step=1)
-        height = st.number_input('Height (cm)', min_value=50, max_value=300, step=1)
     with col2:
-        weight = st.number_input('Weight (kg)', min_value=10, max_value=300, step=1)
-        gender = st.radio('Gender', ('Male', 'Female'))
+        height = st.number_input('Height (cm)', min_value=50, max_value=300, step=1)
     with col3:
-        activity = st.select_slider('Activity', options=[
-            'Little/no exercise','Light exercise',
+        weight = st.number_input('Weight (kg)', min_value=10, max_value=300, step=1)
+
+    # ── Row 2: Gender + Activity ──
+    col4, col5 = st.columns([1, 2])
+    with col4:
+        gender = st.radio('Gender', ('Male', 'Female'))
+    with col5:
+        activity = st.select_slider('Activity Level', options=[
+            'Little/no exercise',
+            'Light exercise',
             'Moderate exercise (3-5 days/wk)',
             'Very active (6-7 days/wk)',
             'Extra active (very active & physical job)'
         ])
+
+    # ── Row 3: Plan + Meals ──
+    col6, col7 = st.columns([2, 1])
+    with col6:
         option = st.selectbox('Choose your weight loss plan:', display.plans)
         st.session_state.weight_loss_option = option
         weight_loss = display.weights[display.plans.index(option)]
+    with col7:
+        number_of_meals = st.slider('Meals per day', min_value=3, max_value=5, step=1, value=3)
 
-    number_of_meals = st.slider('Meals per day', min_value=3, max_value=5, step=1, value=3)
     if number_of_meals == 3:
-        meals_calories_perc = {'breakfast':0.35,'launch':0.40,'dinner':0.25}
+        meals_calories_perc = {'breakfast': 0.35, 'launch': 0.40, 'dinner': 0.25}
     elif number_of_meals == 4:
-        meals_calories_perc = {'breakfast':0.30,'morning snack':0.05,'launch':0.40,'dinner':0.25}
+        meals_calories_perc = {'breakfast': 0.30, 'morning snack': 0.05, 'launch': 0.40, 'dinner': 0.25}
     else:
-        meals_calories_perc = {'breakfast':0.30,'morning snack':0.05,'launch':0.40,'afternoon snack':0.05,'dinner':0.20}
+        meals_calories_perc = {'breakfast': 0.30, 'morning snack': 0.05, 'launch': 0.40, 'afternoon snack': 0.05, 'dinner': 0.20}
 
     generated = st.form_submit_button("⚡ Generate My Diet Plan")
-
-st.markdown('</div>', unsafe_allow_html=True)
 
 if generated:
     st.session_state.generated = True
